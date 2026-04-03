@@ -12,13 +12,13 @@ const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/bot-chat`;
 const INITIAL_BOT_MESSAGE: Message = {
   role: "assistant",
   content:
-    "Hallo! Hier ist ein kurzes Beispiel, wie unser KI-Bot Ihre alten CRM-Leads anspricht. Schreiben Sie eine Nachricht, um den Dialog zu erleben \u2014 z.B. 'Ja, grunds\u00E4tzlich schon interessant'.",
+    "Hi, ist das Tom?\n\nDu hattest vor einiger Zeit bei XY Firma wegen einer Solaranlage angefragt.\n\nIch wollte nur kurz nachfragen:\n\nHast du das Projekt inzwischen schon umgesetzt?",
 };
 
 const SUGGESTIONS = [
-  "Ja, grundsätzlich schon interessant",
-  "Was genau bieten Sie an?",
-  "Wie hoch sind die Kosten?",
+  "Ja, bin ich. Nee, noch nicht umgesetzt.",
+  "Wer ist das hier?",
+  "Hab schon gebaut, danke.",
 ];
 
 const BotDemoSection = () => {
@@ -130,13 +130,13 @@ const BotDemoSection = () => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glow-border bg-primary/5 mb-6">
             <MessageSquare className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Live Bot-Demo</span>
+            <span className="text-sm font-medium text-primary">Live Demo</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Erleben Sie den Bot <span className="text-gradient">in Aktion</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            So spricht unser KI-Bot Ihre alten Leads an — persönlich, intelligent, auf den Punkt. Testen Sie es selbst.
+            So spricht Anna Ihre alten Leads an — persönlich, intelligent, auf den Punkt. Testen Sie es selbst.
           </p>
         </div>
 
@@ -145,7 +145,7 @@ const BotDemoSection = () => {
             {/* Chat header */}
             <div className="flex items-center gap-3 px-6 py-4 border-b border-border">
               <div className="w-3 h-3 rounded-full bg-primary animate-pulse-glow" />
-              <span className="text-sm font-medium">KI-Assistent · Live-Demo</span>
+              <span className="text-sm font-medium">Anna · Ihre nette Mitarbeiterin</span>
             </div>
 
             {/* Messages */}
@@ -167,7 +167,12 @@ const BotDemoSection = () => {
                         : "bg-secondary text-secondary-foreground rounded-bl-md"
                     }`}
                   >
-                    {msg.content}
+                    {msg.content.split("\n").map((line, idx) => (
+                      <span key={idx}>
+                        {line}
+                        {idx < msg.content.split("\n").length - 1 && <br />}
+                      </span>
+                    ))}
                   </div>
                   {msg.role === "user" && (
                     <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center shrink-0">

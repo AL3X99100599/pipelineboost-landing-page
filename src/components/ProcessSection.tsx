@@ -44,11 +44,11 @@ const ProcessSection = () => {
               key={i}
               className="glass-card rounded-2xl p-8 text-center glow-border hover:glow-card transition-all duration-300 group"
             >
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 mb-6 group-hover:bg-primary/20 transition-colors">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 mb-3 group-hover:bg-primary/20 transition-colors">
                 <step.icon className="w-7 h-7 text-primary" />
               </div>
-              <span className="text-xs font-semibold text-primary uppercase tracking-wider">{step.time}</span>
-              <h3 className="text-xl font-semibold mt-2 mb-3">{step.title}</h3>
+              <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-4 block">{step.time}</span>
+              <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
             </div>
           ))}
