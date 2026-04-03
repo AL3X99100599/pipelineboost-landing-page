@@ -130,7 +130,7 @@ const BotDemoSection = () => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glow-border bg-primary/5 mb-6">
             <MessageSquare className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Live Bot-Demo</span>
+            <span className="text-sm font-medium text-primary">Live Demo</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Erleben Sie den Bot <span className="text-gradient">in Aktion</span>
