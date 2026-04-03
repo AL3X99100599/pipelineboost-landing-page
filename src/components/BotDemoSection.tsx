@@ -145,7 +145,7 @@ const BotDemoSection = () => {
             {/* Chat header */}
             <div className="flex items-center gap-3 px-6 py-4 border-b border-border">
               <div className="w-3 h-3 rounded-full bg-primary animate-pulse-glow" />
-              <span className="text-sm font-medium">KI-Assistent · Live-Demo</span>
+              <span className="text-sm font-medium">Anna · Ihre nette Mitarbeiterin</span>
             </div>
 
             {/* Messages */}
