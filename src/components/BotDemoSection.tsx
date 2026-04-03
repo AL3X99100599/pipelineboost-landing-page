@@ -1,58 +1,128 @@
 import { useState, useRef, useEffect } from "react";
-import { MessageSquare, Send, Bot, User } from "lucide-react";
+import { MessageSquare, Send, Bot, User, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 interface Message {
-  role: "bot" | "user";
-  text: string;
+  role: "assistant" | "user";
+  content: string;
 }
 
-const demoFlow: { trigger?: string; bot: string }[] = [
-  {
-    bot: "Hallo! Hier ist ein kurzes Beispiel, wie unser KI-Bot Ihre alten CRM-Leads anspricht. Klicken Sie auf eine der Antwortoptionen, um den Dialog zu erleben.",
-  },
-  {
-    trigger: "Ja, grundsätzlich schon interessant",
-    bot: "Freut mich! Darf ich fragen, ob sich seit Ihrem letzten Kontakt etwas verändert hat — z.B. bei den Stromkosten oder der Dachsituation?",
-  },
-  {
-    trigger: "Ja, die Stromkosten sind nochmal gestiegen",
-    bot: "Verstehe ich gut — das hören wir derzeit häufig. Hätten Sie Interesse an einem kurzen, unverbindlichen Beratungsgespräch, um Ihre aktuelle Situation zu prüfen? Dauert nur 15 Minuten.",
-  },
-  {
-    trigger: "Ja, können wir machen",
-    bot: "Perfekt! Ich leite Sie direkt an einen unserer Solarberater weiter. — Genau so einfach wird aus einem alten Lead ein neuer Termin. 🎯",
-  },
+const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/bot-chat`;
+
+const INITIAL_BOT_MESSAGE: Message = {
+  role: "assistant",
+  content:
+    "Hallo! Hier ist ein kurzes Beispiel, wie unser KI-Bot Ihre alten CRM-Leads anspricht. Schreiben Sie eine Nachricht, um den Dialog zu erleben \u2014 z.B. 'Ja, grunds\u00E4tzlich schon interessant'.",
+};
+
+const SUGGESTIONS = [
+  "Ja, grundsätzlich schon interessant",
+  "Was genau bieten Sie an?",
+  "Wie hoch sind die Kosten?",
 ];
 
 const BotDemoSection = () => {
-  const [messages, setMessages] = useState<Message[]>([
-    { role: "bot", text: demoFlow[0].bot },
-  ]);
-  const [step, setStep] = useState(1);
+  const [messages, setMessages] = useState<Message[]>([INITIAL_BOT_MESSAGE]);
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleReply = (triggerText: string) => {
-    if (step >= demoFlow.length) return;
-    const entry = demoFlow[step];
-    setMessages((prev) => [
-      ...prev,
-      { role: "user", text: triggerText },
-    ]);
-    setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        { role: "bot", text: entry.bot },
-      ]);
-      setStep((s) => s + 1);
-    }, 800);
+  const sendMessage = async (text: string) => {
+    if (!text.trim() || isLoading) return;
+
+    const userMsg: Message = { role: "user", content: text.trim() };
+    const updatedMessages = [...messages, userMsg];
+    setMessages(updatedMessages);
+    setInput("");
+    setIsLoading(true);
+
+    let assistantContent = "";
+
+    try {
+      const resp = await fetch(CHAT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        },
+        body: JSON.stringify({
+          messages: updatedMessages.map((m) => ({
+            role: m.role,
+            content: m.content,
+          })),
+        }),
+      });
+
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({ error: "Fehler" }));
+        toast.error(err.error || "Ein Fehler ist aufgetreten.");
+        setIsLoading(false);
+        return;
+      }
+
+      if (!resp.body) throw new Error("No response body");
+
+      const reader = resp.body.getReader();
+      const decoder = new TextDecoder();
+      let textBuffer = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        textBuffer += decoder.decode(value, { stream: true });
+
+        let newlineIndex: number;
+        while ((newlineIndex = textBuffer.indexOf("\n")) !== -1) {
+          let line = textBuffer.slice(0, newlineIndex);
+          textBuffer = textBuffer.slice(newlineIndex + 1);
+
+          if (line.endsWith("\r")) line = line.slice(0, -1);
+          if (line.startsWith(":") || line.trim() === "") continue;
+          if (!line.startsWith("data: ")) continue;
+
+          const jsonStr = line.slice(6).trim();
+          if (jsonStr === "[DONE]") break;
+
+          try {
+            const parsed = JSON.parse(jsonStr);
+            const delta = parsed.choices?.[0]?.delta?.content as string | undefined;
+            if (delta) {
+              assistantContent += delta;
+              setMessages((prev) => {
+                const last = prev[prev.length - 1];
+                if (last?.role === "assistant" && prev.length > 1 && prev[prev.length - 2]?.role === "user") {
+                  return prev.map((m, i) =>
+                    i === prev.length - 1 ? { ...m, content: assistantContent } : m
+                  );
+                }
+                return [...prev, { role: "assistant", content: assistantContent }];
+              });
+            }
+          } catch {
+            textBuffer = line + "\n" + textBuffer;
+            break;
+          }
+        }
+      }
+    } catch (e) {
+      console.error("Bot chat error:", e);
+      toast.error("Verbindungsfehler. Bitte versuchen Sie es erneut.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const isComplete = step >= demoFlow.length;
-  const currentOptions = !isComplete && demoFlow[step].trigger ? [demoFlow[step].trigger!] : [];
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    sendMessage(input);
+  };
+
+  const showSuggestions = messages.length === 1 && !isLoading;
 
   return (
     <section id="demo" className="py-20 sm:py-28 bg-secondary/30">
@@ -66,7 +136,7 @@ const BotDemoSection = () => {
             Erleben Sie den Bot <span className="text-gradient">in Aktion</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            So spricht unser KI-Bot Ihre alten Leads an — persönlich, intelligent, auf den Punkt.
+            So spricht unser KI-Bot Ihre alten Leads an — persönlich, intelligent, auf den Punkt. Testen Sie es selbst.
           </p>
         </div>
 
@@ -85,7 +155,7 @@ const BotDemoSection = () => {
                   key={i}
                   className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                 >
-                  {msg.role === "bot" && (
+                  {msg.role === "assistant" && (
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                       <Bot className="w-4 h-4 text-primary" />
                     </div>
@@ -97,7 +167,7 @@ const BotDemoSection = () => {
                         : "bg-secondary text-secondary-foreground rounded-bl-md"
                     }`}
                   >
-                    {msg.text}
+                    {msg.content}
                   </div>
                   {msg.role === "user" && (
                     <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center shrink-0">
@@ -106,39 +176,71 @@ const BotDemoSection = () => {
                   )}
                 </div>
               ))}
+              {isLoading && messages[messages.length - 1]?.role === "user" && (
+                <div className="flex gap-3 justify-start">
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <Bot className="w-4 h-4 text-primary" />
+                  </div>
+                  <div className="bg-secondary text-secondary-foreground px-4 py-3 rounded-2xl rounded-bl-md text-sm">
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  </div>
+                </div>
+              )}
               <div ref={endRef} />
             </div>
 
-            {/* Reply options */}
-            <div className="px-6 pb-6">
-              {currentOptions.length > 0 ? (
-                <div className="space-y-2">
-                  {currentOptions.map((opt, i) => (
-                    <button
-                      key={i}
-                      onClick={() => handleReply(opt)}
-                      className="w-full flex items-center justify-between gap-2 px-4 py-3 rounded-xl glow-border bg-primary/5 hover:bg-primary/10 transition-all text-sm font-medium text-foreground"
-                    >
-                      {opt}
-                      <Send className="w-4 h-4 text-primary shrink-0" />
-                    </button>
-                  ))}
-                </div>
-              ) : isComplete ? (
-                <div className="text-center py-3">
-                  <p className="text-sm text-primary font-medium">✓ Demo abgeschlossen</p>
+            {/* Suggestions */}
+            {showSuggestions && (
+              <div className="px-6 pb-3 space-y-2">
+                {SUGGESTIONS.map((s, i) => (
                   <button
-                    onClick={() => {
-                      setMessages([{ role: "bot", text: demoFlow[0].bot }]);
-                      setStep(1);
-                    }}
-                    className="text-xs text-muted-foreground hover:text-foreground mt-2 underline"
+                    key={i}
+                    onClick={() => sendMessage(s)}
+                    className="w-full flex items-center justify-between gap-2 px-4 py-3 rounded-xl glow-border bg-primary/5 hover:bg-primary/10 transition-all text-sm font-medium text-foreground"
                   >
-                    Nochmal starten
+                    {s}
+                    <Send className="w-4 h-4 text-primary shrink-0" />
                   </button>
-                </div>
-              ) : null}
-            </div>
+                ))}
+              </div>
+            )}
+
+            {/* Input */}
+            <form onSubmit={handleSubmit} className="px-6 pb-6 pt-2">
+              <div className="flex gap-2">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Ihre Nachricht…"
+                  disabled={isLoading}
+                  className="flex-1 bg-secondary/50 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50"
+                />
+                <button
+                  type="submit"
+                  disabled={isLoading || !input.trim()}
+                  className="px-4 py-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50"
+                >
+                  <Send className="w-4 h-4" />
+                </button>
+              </div>
+            </form>
+
+            {/* Reset */}
+            {messages.length > 2 && !isLoading && (
+              <div className="text-center pb-4">
+                <button
+                  onClick={() => {
+                    setMessages([INITIAL_BOT_MESSAGE]);
+                    setInput("");
+                  }}
+                  className="text-xs text-muted-foreground hover:text-foreground underline"
+                >
+                  Gespräch neu starten
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
