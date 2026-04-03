@@ -16,9 +16,9 @@ const INITIAL_BOT_MESSAGE: Message = {
 };
 
 const SUGGESTIONS = [
-  "Ja, grundsätzlich schon interessant",
-  "Was genau bieten Sie an?",
-  "Wie hoch sind die Kosten?",
+  "Ja, bin ich. Nee, noch nicht umgesetzt.",
+  "Wer ist das hier?",
+  "Hab schon gebaut, danke.",
 ];
 
 const BotDemoSection = () => {
