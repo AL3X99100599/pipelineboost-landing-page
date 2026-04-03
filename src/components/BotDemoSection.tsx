@@ -12,7 +12,7 @@ const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/bot-chat`;
 const INITIAL_BOT_MESSAGE: Message = {
   role: "assistant",
   content:
-    "Hallo! Hier ist ein kurzes Beispiel, wie unser KI-Bot Ihre alten CRM-Leads anspricht. Schreiben Sie eine Nachricht, um den Dialog zu erleben \u2014 z.B. 'Ja, grunds\u00E4tzlich schon interessant'.",
+    "Hi, ist das Tom?\n\nDu hattest vor einiger Zeit bei XY Firma wegen einer Solaranlage angefragt.\n\nIch wollte nur kurz nachfragen:\n\nHast du das Projekt inzwischen schon umgesetzt?",
 };
 
 const SUGGESTIONS = [
