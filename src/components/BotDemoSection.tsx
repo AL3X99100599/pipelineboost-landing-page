@@ -136,7 +136,7 @@ const BotDemoSection = () => {
             Erleben Sie den Bot <span className="text-gradient">in Aktion</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            So spricht unser KI-Bot Ihre alten Leads an — persönlich, intelligent, auf den Punkt. Testen Sie es selbst.
+            So spricht Anna Ihre alten Leads an — persönlich, intelligent, auf den Punkt. Testen Sie es selbst.
           </p>
         </div>
 
