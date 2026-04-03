@@ -167,7 +167,12 @@ const BotDemoSection = () => {
                         : "bg-secondary text-secondary-foreground rounded-bl-md"
                     }`}
                   >
-                    {msg.content}
+                    {msg.content.split("\n").map((line, idx) => (
+                      <span key={idx}>
+                        {line}
+                        {idx < msg.content.split("\n").length - 1 && <br />}
+                      </span>
+                    ))}
                   </div>
                   {msg.role === "user" && (
                     <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center shrink-0">
