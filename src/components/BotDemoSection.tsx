@@ -34,13 +34,26 @@ const BotDemoSection = () => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const userMessageCount = messages.filter((m) => m.role === "user").length;
+  const demoEnded = userMessageCount >= MAX_USER_MESSAGES;
+
   const sendMessage = async (text: string) => {
-    if (!text.trim() || isLoading) return;
+    if (!text.trim() || isLoading || demoEnded) return;
 
     const userMsg: Message = { role: "user", content: text.trim() };
     const updatedMessages = [...messages, userMsg];
+    const newUserCount = userMessageCount + 1;
     setMessages(updatedMessages);
     setInput("");
+
+    if (newUserCount >= MAX_USER_MESSAGES) {
+      // Demo limit reached — show closing message instead of calling API
+      setTimeout(() => {
+        setMessages((prev) => [...prev, DEMO_END_MESSAGE]);
+      }, 800);
+      return;
+    }
+
     setIsLoading(true);
 
     let assistantContent = "";
