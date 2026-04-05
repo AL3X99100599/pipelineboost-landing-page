@@ -137,8 +137,6 @@ const BotDemoSection = () => {
     sendMessage(input);
   };
 
-  const showSuggestions = messages.length === 1 && !isLoading;
-
   return (
     <section id="demo" className="py-20 sm:py-28 bg-secondary/30">
       <div className="container mx-auto px-4 sm:px-6">
