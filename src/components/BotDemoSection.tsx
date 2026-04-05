@@ -207,23 +207,6 @@ const BotDemoSection = () => {
               <div ref={endRef} />
             </div>
 
-            {/* Suggestions */}
-            {showSuggestions && (
-              <div className="px-6 pb-3 space-y-2">
-                {SUGGESTIONS.map((s, i) => (
-                  <button
-                    key={i}
-                    onClick={() => sendMessage(s)}
-                    className="w-full flex items-center justify-between gap-2 px-4 py-3 rounded-xl glow-border bg-primary/5 hover:bg-primary/10 transition-all text-sm font-medium text-foreground"
-                  >
-                    {s}
-                    <Send className="w-4 h-4 text-primary shrink-0" />
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {/* Input */}
             <form onSubmit={handleSubmit} className="px-6 pb-6 pt-2">
               <div className="flex gap-2">
                 <input
