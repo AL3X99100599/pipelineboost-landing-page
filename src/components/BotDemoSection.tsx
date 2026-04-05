@@ -207,26 +207,32 @@ const BotDemoSection = () => {
               <div ref={endRef} />
             </div>
 
-            <form onSubmit={handleSubmit} className="px-6 pb-6 pt-2">
-              <div className="flex gap-2">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ihre Nachricht…"
-                  disabled={isLoading}
-                  className="flex-1 bg-secondary/50 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50"
-                />
-                <button
-                  type="submit"
-                  disabled={isLoading || !input.trim()}
-                  className="px-4 py-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50"
-                >
-                  <Send className="w-4 h-4" />
-                </button>
+            {demoEnded ? (
+              <div className="px-6 pb-6 pt-2 text-center text-sm text-muted-foreground">
+                Demo beendet — starte das Gespräch neu oder buch dir unten einen Termin.
               </div>
-            </form>
+            ) : (
+              <form onSubmit={handleSubmit} className="px-6 pb-6 pt-2">
+                <div className="flex gap-2">
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="Ihre Nachricht…"
+                    disabled={isLoading}
+                    className="flex-1 bg-secondary/50 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isLoading || !input.trim()}
+                    className="px-4 py-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50"
+                  >
+                    <Send className="w-4 h-4" />
+                  </button>
+                </div>
+              </form>
+            )}
 
             {/* Reset */}
             {messages.length > 2 && !isLoading && (
