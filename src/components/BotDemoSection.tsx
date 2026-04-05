@@ -15,11 +15,13 @@ const INITIAL_BOT_MESSAGE: Message = {
     "Hi, ist das Tom?\n\nDu hattest vor einiger Zeit bei XY Firma wegen einer Solaranlage angefragt.\n\nIch wollte nur kurz nachfragen:\n\nHast du das Projekt inzwischen schon umgesetzt?",
 };
 
-const SUGGESTIONS = [
-  "Ja, bin ich. Nee, noch nicht umgesetzt.",
-  "Wer ist das hier?",
-  "Hab schon gebaut, danke.",
-];
+const MAX_USER_MESSAGES = 4;
+
+const DEMO_END_MESSAGE: Message = {
+  role: "assistant",
+  content:
+    "Hey, du bist am Ende der Demo angekommen!\n\nWenn dich das überzeugt hat, buch dir gern ein kurzes 15-minütiges Gespräch über den Link weiter unten.\n\nWir freuen uns auf dich!",
+};
 
 const BotDemoSection = () => {
   const [messages, setMessages] = useState<Message[]>([INITIAL_BOT_MESSAGE]);
@@ -32,13 +34,26 @@ const BotDemoSection = () => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const userMessageCount = messages.filter((m) => m.role === "user").length;
+  const demoEnded = userMessageCount >= MAX_USER_MESSAGES;
+
   const sendMessage = async (text: string) => {
-    if (!text.trim() || isLoading) return;
+    if (!text.trim() || isLoading || demoEnded) return;
 
     const userMsg: Message = { role: "user", content: text.trim() };
     const updatedMessages = [...messages, userMsg];
+    const newUserCount = userMessageCount + 1;
     setMessages(updatedMessages);
     setInput("");
+
+    if (newUserCount >= MAX_USER_MESSAGES) {
+      // Demo limit reached — show closing message instead of calling API
+      setTimeout(() => {
+        setMessages((prev) => [...prev, DEMO_END_MESSAGE]);
+      }, 800);
+      return;
+    }
+
     setIsLoading(true);
 
     let assistantContent = "";
@@ -122,8 +137,6 @@ const BotDemoSection = () => {
     sendMessage(input);
   };
 
-  const showSuggestions = messages.length === 1 && !isLoading;
-
   return (
     <section id="demo" className="py-20 sm:py-28 bg-secondary/30">
       <div className="container mx-auto px-4 sm:px-6">
@@ -194,43 +207,32 @@ const BotDemoSection = () => {
               <div ref={endRef} />
             </div>
 
-            {/* Suggestions */}
-            {showSuggestions && (
-              <div className="px-6 pb-3 space-y-2">
-                {SUGGESTIONS.map((s, i) => (
+            {demoEnded ? (
+              <div className="px-6 pb-6 pt-2 text-center text-sm text-muted-foreground">
+                Demo beendet — starte das Gespräch neu oder buch dir unten einen Termin.
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="px-6 pb-6 pt-2">
+                <div className="flex gap-2">
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="Ihre Nachricht…"
+                    disabled={isLoading}
+                    className="flex-1 bg-secondary/50 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50"
+                  />
                   <button
-                    key={i}
-                    onClick={() => sendMessage(s)}
-                    className="w-full flex items-center justify-between gap-2 px-4 py-3 rounded-xl glow-border bg-primary/5 hover:bg-primary/10 transition-all text-sm font-medium text-foreground"
+                    type="submit"
+                    disabled={isLoading || !input.trim()}
+                    className="px-4 py-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50"
                   >
-                    {s}
-                    <Send className="w-4 h-4 text-primary shrink-0" />
+                    <Send className="w-4 h-4" />
                   </button>
-                ))}
-              </div>
+                </div>
+              </form>
             )}
-
-            {/* Input */}
-            <form onSubmit={handleSubmit} className="px-6 pb-6 pt-2">
-              <div className="flex gap-2">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ihre Nachricht…"
-                  disabled={isLoading}
-                  className="flex-1 bg-secondary/50 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50"
-                />
-                <button
-                  type="submit"
-                  disabled={isLoading || !input.trim()}
-                  className="px-4 py-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50"
-                >
-                  <Send className="w-4 h-4" />
-                </button>
-              </div>
-            </form>
 
             {/* Reset */}
             {messages.length > 2 && !isLoading && (
