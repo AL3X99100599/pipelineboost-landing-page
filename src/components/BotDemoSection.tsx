@@ -15,11 +15,13 @@ const INITIAL_BOT_MESSAGE: Message = {
     "Hi, ist das Tom?\n\nDu hattest vor einiger Zeit bei XY Firma wegen einer Solaranlage angefragt.\n\nIch wollte nur kurz nachfragen:\n\nHast du das Projekt inzwischen schon umgesetzt?",
 };
 
-const SUGGESTIONS = [
-  "Ja, bin ich. Nee, noch nicht umgesetzt.",
-  "Wer ist das hier?",
-  "Hab schon gebaut, danke.",
-];
+const MAX_USER_MESSAGES = 4;
+
+const DEMO_END_MESSAGE: Message = {
+  role: "assistant",
+  content:
+    "Hey, du bist am Ende der Demo angekommen!\n\nWenn dich das überzeugt hat, buch dir gern ein kurzes 15-minütiges Gespräch über den Link weiter unten.\n\nWir freuen uns auf dich!",
+};
 
 const BotDemoSection = () => {
   const [messages, setMessages] = useState<Message[]>([INITIAL_BOT_MESSAGE]);
