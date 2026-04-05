@@ -13,15 +13,15 @@ import FooterSection from "@/components/FooterSection";
 const Index = () => (
   <div className="min-h-screen bg-background text-foreground">
     <StickyNav />
+    <BotDemoSection />
+    <CalendlySection />
     <HeroSection />
     <ForWhomSection />
-    <BotDemoSection />
     <CalculatorSection />
     <ProcessSection />
     <RiskReversalBanner />
     <TrustSection />
     <ObjectionSection />
-    <CalendlySection />
     <FooterSection />
   </div>
 );
