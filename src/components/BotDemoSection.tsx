@@ -146,7 +146,7 @@ const BotDemoSection = () => {
             <span className="text-sm font-medium text-primary">Live Demo</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Erleben Sie den Bot <span className="text-gradient">in Aktion</span>
+            Ihre Reaktivierungs-Fachkraft <span className="text-gradient">in Aktion</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             So spricht Anna Ihre alten Leads an — persönlich, intelligent, auf den Punkt. Testen Sie es selbst.
