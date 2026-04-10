@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import ForWhomSection from "@/components/ForWhomSection";
 import BotDemoSection from "@/components/BotDemoSection";
 import CalculatorSection from "@/components/CalculatorSection";
+import ComparisonSection from "@/components/ComparisonSection";
 import ProcessSection from "@/components/ProcessSection";
 import RiskReversalBanner from "@/components/RiskReversalBanner";
 import TrustSection from "@/components/TrustSection";
@@ -18,6 +19,7 @@ const Index = () => (
     <HeroSection />
     <ForWhomSection />
     <CalculatorSection />
+    <ComparisonSection />
     <ProcessSection />
     <RiskReversalBanner />
     <TrustSection />
