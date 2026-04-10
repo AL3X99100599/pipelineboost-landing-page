@@ -12,7 +12,7 @@ const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/bot-chat`;
 const INITIAL_BOT_MESSAGE: Message = {
   role: "assistant",
   content:
-    "Hey Tom\n\nHier ist Anna von PipelineBoost\n\nDu hattest dich vor einiger Zeit mal wegen einer Solaranlage bei uns gemeldet\n\nWollte einfach mal nachfragen ob sich da bei dir inzwischen was getan hat",
+    "Hi, ist das Tom?\n\nHier ist Anna von Solar Deutschland\n\nDu hattest vor einiger Zeit mal wegen einer Solaranlage bei uns angefragt oder?",
 };
 
 const MAX_USER_MESSAGES = 4;
