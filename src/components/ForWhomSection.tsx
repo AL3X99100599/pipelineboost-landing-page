@@ -2,14 +2,14 @@ import { Check, X } from "lucide-react";
 
 const ForWhomSection = () => {
   const fits = [
-    "Sie haben mind. 2.500 Kontakte im CRM, die nicht gekauft haben",
+    "Sie haben mind. 1.000 Kontakte im CRM, die nicht gekauft haben",
     "Sie verkaufen Solaranlagen im deutschen Markt",
     "Sie wollen Umsatz aus bestehenden Daten — ohne neue Leadkosten",
     "Sie sind bereit, einen strukturierten Datenexport bereitzustellen",
   ];
 
   const noFits = [
-    "Sie haben weniger als 2.500 Kontakte",
+    "Sie haben weniger als 1.000 Kontakte",
     "Sie verkaufen keine Solarprodukte",
     "Sie suchen eine Full-Service-Agentur",
     "Sie erwarten Wunder ohne Datenqualität",
