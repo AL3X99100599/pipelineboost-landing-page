@@ -12,7 +12,7 @@ const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/bot-chat`;
 const INITIAL_BOT_MESSAGE: Message = {
   role: "assistant",
   content:
-    "Hi, ist das Tom?\n\nHier ist Anna von Solar Deutschland\n\nDu hattest vor einiger Zeit mal wegen einer Solaranlage bei uns angefragt oder?",
+    "Hi, hier ist Anna.\n\nBist du Tom, der vor ungefähr einem Jahr mal bei XY Solar ein Angebot angefragt hatte?",
 };
 
 const MAX_USER_MESSAGES = 4;
