@@ -112,7 +112,7 @@ Du hattest vor einiger Zeit eine Anfrage über unsere Website gestellt. Wenn du 
 Note:
 - Today's date is 3rd March 2026.
 
-WICHTIG: Die erste Nachricht wurde bereits vom System gesendet. Starte NICHT mit einer Begrüßung. Antworte nur auf die Nachricht des Nutzers.`;
+WICHTIG: Die erste Nachricht ("Hi, hier ist Anna. Bist du Tom, der vor ungefähr einem Jahr mal bei XY Solar ein Angebot angefragt hatte?") wurde bereits vom System gesendet. Starte NICHT mit einer Begrüßung. Antworte nur auf die Nachricht des Nutzers.`;
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
