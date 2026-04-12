@@ -143,13 +143,15 @@ const BotDemoSection = () => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glow-border bg-primary/5 mb-6">
             <MessageSquare className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Live Demo</span>
+            <span className="text-sm font-medium text-primary">Live Demo — Jetzt testen</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Ihre Reaktivierungs-Fachkraft <span className="text-gradient">in Aktion</span>
+            So klingt es, wenn ein alter Lead{" "}
+            <span className="text-gradient">plötzlich wieder Interesse zeigt</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            So spricht Anna Ihre alten Leads an — persönlich, intelligent, auf den Punkt. Testen Sie es selbst.
+            Unser KI-Bot spricht Ihre Kontakte persönlich an — per SMS, zur richtigen Zeit,
+            mit dem richtigen Kontext. Testen Sie selbst, wie eine echte Reaktivierung abläuft.
           </p>
         </div>
 

@@ -21,11 +21,12 @@ const CalendlySection = () => {
             <span className="text-sm font-medium text-primary">Erstgespräch buchen</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Lassen Sie uns sprechen — <span className="text-gradient">unverbindlich</span>
+            In 15 Minuten wissen Sie, ob{" "}
+            <span className="text-gradient">ungenutztes Potenzial</span> in Ihrem CRM liegt
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto mb-2">
-            15 Minuten. Wir prüfen gemeinsam, ob Ihre Daten Potenzial haben.
-            Kein Pitch, kein Druck.
+            Kurzes Gespräch. Wir prüfen gemeinsam Ihre Daten und geben Ihnen
+            eine ehrliche Einschätzung — kein Pitch, kein Druck.
           </p>
           <ArrowDown className="w-5 h-5 text-primary mx-auto mt-4 animate-bounce" />
         </div>

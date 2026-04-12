@@ -1,4 +1,3 @@
-import { ChevronDown } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -9,15 +8,15 @@ import {
 const objections = [
   {
     q: "Wir haben die Leads schon mehrfach kontaktiert — das bringt nichts mehr.",
-    a: "Die meisten Unternehmen haben ihre alten Leads per E-Mail oder Telefon kontaktiert — oft ohne Personalisierung und ohne Timing-Intelligenz. Unser KI-Bot spricht Leads individuell an, zur richtigen Zeit, mit dem richtigen Kontext. Das ist ein komplett anderer Kanal.",
+    a: "Wahrscheinlich per Telefon oder E-Mail — oft ohne Personalisierung und ohne Timing-Strategie. SMS ist ein komplett anderer Kanal: über 90 % Öffnungsrate, keine Warteschleife, keine verpassten Anrufe. Unser KI-Bot spricht jeden Kontakt individuell an, zur richtigen Zeit, mit dem richtigen Kontext. Das ist nicht dasselbe wie \"nochmal anrufen\".",
+  },
+  {
+    q: "Unser Vertrieb kann das doch selbst machen.",
+    a: "Kann er — aber tut er es? Vertriebsteams sind auf Neuabschlüsse fokussiert. Alte Kontakte systematisch nachzufassen ist Fleißarbeit, die im Tagesgeschäft immer nach hinten rutscht. Unser System übernimmt genau diesen Teil — Ihr Vertrieb bekommt fertige Termine und kann sich auf das konzentrieren, was er am besten kann: abschließen.",
   },
   {
     q: "Was, wenn die Datenqualität schlecht ist?",
-    a: "Wir sind offen: Ergebnisse hängen direkt von der Datenqualität ab. Deshalb prüfen wir vor dem Start die Struktur Ihrer Daten und geben Ihnen eine ehrliche Einschätzung. Kein Setup-Fee bedeutet auch: kein Risiko, es auszuprobieren.",
-  },
-  {
-    q: "Wie unterscheidet sich das von einem Callcenter?",
-    a: "Ein Callcenter ruft kalt an und kostet Sie pro Stunde — unabhängig vom Ergebnis. Wir reaktivieren per KI-gestütztem Messaging, personalisiert und skalierbar. Und Sie zahlen nur bei gebuchtem Termin.",
+    a: "Dann sind wir ehrlich zu Ihnen. Wir prüfen vor dem Start die Struktur und Qualität Ihrer Daten und geben Ihnen eine realistische Einschätzung. Kein Setup-Fee bedeutet auch: kein Risiko, es mit einem ersten Segment auszuprobieren.",
   },
   {
     q: "Was kostet mich das, wenn es nicht funktioniert?",
@@ -29,7 +28,11 @@ const objections = [
   },
   {
     q: "Brauchen wir technische Integration oder ein bestimmtes CRM?",
-    a: "Nein. Sie exportieren einfach eine Liste Ihrer Kontakte — als CSV oder Excel. Keine API-Anbindung, keine technische Integration nötig.",
+    a: "Nein. Sie exportieren einfach eine Liste Ihrer Kontakte — als CSV oder Excel. Keine API-Anbindung, keine technische Integration nötig. Das dauert in der Regel 10 Minuten.",
+  },
+  {
+    q: "Wie viele Kontakte brauchen wir mindestens?",
+    a: "Ab 500 Kontakten wird es interessant. Je mehr verwertbare Daten vorhanden sind, desto besser die Ergebnisse. Die meisten unserer Partner starten mit 2.000–10.000 Kontakten.",
   },
 ];
 
@@ -38,7 +41,8 @@ const ObjectionSection = () => (
     <div className="container mx-auto px-4 sm:px-6">
       <div className="text-center mb-16">
         <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-          Häufige <span className="text-gradient">Fragen</span>
+          Was Vertriebsleiter uns fragen —{" "}
+          <span className="text-gradient">bevor sie starten</span>
         </h2>
       </div>
 

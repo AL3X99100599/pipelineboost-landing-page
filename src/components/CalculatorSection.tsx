@@ -35,7 +35,8 @@ const CalculatorSection = () => {
             Wie viel Umsatz steckt in <span className="text-gradient">Ihrem CRM?</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Schätzen Sie das Potenzial, das in Ihren ungenutzten Leads schlummert.
+            Sie haben für jeden einzelnen dieser Leads bezahlt. Berechnen Sie,
+            wie viel davon als Umsatz zurückkommen kann.
           </p>
         </div>
 

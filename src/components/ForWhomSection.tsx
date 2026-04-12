@@ -2,25 +2,29 @@ import { Check, X } from "lucide-react";
 
 const ForWhomSection = () => {
   const fits = [
-    "Sie haben mind. 1.000 Kontakte im CRM, die nicht gekauft haben",
-    "Sie verkaufen Solaranlagen im deutschen Markt",
-    "Sie wollen Umsatz aus bestehenden Daten — ohne neue Leadkosten",
-    "Sie sind bereit, einen strukturierten Datenexport bereitzustellen",
+    "Sie investieren €50–€500 pro Lead — und ein Großteil davon hat nie gekauft",
+    "Ihr Vertrieb ist auf Neuabschlüsse fokussiert, nicht auf das Nachfassen alter Kontakte",
+    "Sie haben 1.000+ Kontakte im CRM, die seit Wochen oder Monaten unberührt liegen",
+    "Sie wollen planbaren Umsatz aus bestehenden Daten — ohne neue Leadkosten",
   ];
 
   const noFits = [
-    "Sie haben weniger als 1.000 Kontakte",
-    "Sie verkaufen keine Solarprodukte",
-    "Sie suchen eine Full-Service-Agentur",
-    "Sie erwarten Wunder ohne Datenqualität",
+    "Sie haben weniger als 500 verwertbare Kontakte",
+    "Sie haben kein CRM und keine strukturierten Kontaktdaten",
+    "Sie suchen eine Full-Service-Agentur für Neukundengewinnung",
+    "Sie erwarten Ergebnisse ohne brauchbare Datengrundlage",
   ];
 
   return (
     <section className="py-20 sm:py-28">
       <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16">
-          Für wen ist das <span className="text-gradient">gedacht?</span>
+        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">
+          Gebaut für Vertriebsteams, die{" "}
+          <span className="text-gradient">zu viel für Leads zahlen</span>
         </h2>
+        <p className="text-muted-foreground text-center max-w-xl mx-auto mb-16">
+          …und zu wenig daraus machen.
+        </p>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {/* Fit */}

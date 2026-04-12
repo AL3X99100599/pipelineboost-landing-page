@@ -1,4 +1,4 @@
-import { ArrowRight, Zap, Shield, Clock } from "lucide-react";
+import { ArrowRight, Zap, Shield, Clock, TrendingUp } from "lucide-react";
 
 const HeroSection = () => {
   const scrollToCalendly = () => {
@@ -23,17 +23,17 @@ const HeroSection = () => {
 
           {/* Headline */}
           <h1 className="animate-fade-up-delay-1 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.08] tracking-tight mb-6">
-            Ihre alten Leads sind{" "}
-            <span className="text-gradient">bares Geld</span>.
+            Jeder Lead hat Sie{" "}
+            <span className="text-gradient">€50–€500</span> gekostet.
             <br />
-            <span className="text-muted-foreground">Wir holen es zurück.</span>
+            <span className="text-muted-foreground">Wir reaktivieren die, die nie gekauft haben.</span>
           </h1>
 
           {/* Subheadline */}
           <p className="animate-fade-up-delay-2 text-lg sm:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed">
-            Wir reaktivieren Ihre ungenutzten CRM-Kontakte — vollautomatisch per KI-Bot.
-            Sie zahlen nur für gebuchte, qualifizierte Termine.
-            Kein Setup-Fee. Kein Retainer. Kein Risiko.
+            Ihr Vertrieb schließt Neukunden ab. Alte CRM-Kontakte bleiben liegen.
+            Unser KI-System macht aus diesen Kontakten gebuchte, qualifizierte Termine —
+            ohne Fixkosten, ohne Setup-Fee. Sie zahlen nur bei Ergebnis.
           </p>
 
           {/* CTAs */}
@@ -56,15 +56,15 @@ const HeroSection = () => {
           {/* Trust pills */}
           <div className="animate-fade-up-delay-3 flex flex-wrap gap-6 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4 text-primary" />
-              <span>Keine Setupkosten</span>
+              <TrendingUp className="w-4 h-4 text-primary" />
+              <span>€10k–€30k Mehrumsatz aus eigenem CRM</span>
             </div>
             <div className="flex items-center gap-2">
               <Clock className="w-4 h-4 text-primary" />
-              <span>In 72h live</span>
+              <span>Erste Termine in 96h</span>
             </div>
             <div className="flex items-center gap-2">
-              <Zap className="w-4 h-4 text-primary" />
+              <Shield className="w-4 h-4 text-primary" />
               <span>Nur zahlen bei Ergebnis</span>
             </div>
           </div>

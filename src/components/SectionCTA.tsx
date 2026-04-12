@@ -6,7 +6,7 @@ const SectionCTA = ({ text = "Erstgespräch buchen" }: { text?: string }) => {
   };
 
   return (
-    <div className="text-center mt-12">
+    <div className="text-center py-8">
       <button
         onClick={scrollToCalendly}
         className="group inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-xl hover:brightness-110 transition-all text-lg"
@@ -14,6 +14,9 @@ const SectionCTA = ({ text = "Erstgespräch buchen" }: { text?: string }) => {
         {text}
         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
       </button>
+      <p className="text-xs text-muted-foreground mt-3">
+        ✓ Kein Setup-Fee · ✓ Kein Risiko · ✓ Erste Termine in 96h
+      </p>
     </div>
   );
 };
