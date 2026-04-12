@@ -15,12 +15,12 @@ const INITIAL_BOT_MESSAGE: Message = {
     "Hi, hier ist Anna.\n\nBist du Tom, der vor ungefähr einem Jahr mal bei XY Solar ein Angebot angefragt hatte?",
 };
 
-const MAX_USER_MESSAGES = 4;
+const MAX_USER_MESSAGES = 10;
 
 const DEMO_END_MESSAGE: Message = {
   role: "assistant",
   content:
-    "Hey, du bist am Ende der Demo angekommen!\n\nWenn dich das überzeugt hat, buch dir gern ein kurzes 15-minütiges Gespräch über den Link weiter unten.\n\nWir freuen uns auf dich!",
+    "Hey, du bist am Ende der Demo angekommen! So oder ähnlich könnte auch dein Vertrieb in wenigen Tagen strukturierte Termine erhalten.\n\nWenn dich das überzeugt hat, buch dir gern ein kurzes Gespräch über den Link weiter unten.",
 };
 
 const BotDemoSection = () => {
