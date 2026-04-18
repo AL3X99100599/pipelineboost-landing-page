@@ -10,8 +10,8 @@ const RiskReversalBanner = () => (
         </h2>
         <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
           Sie tragen kein finanzielles Risiko. Kein Setup-Fee, kein Retainer, keine Vorabkosten.
-          Wir verdienen nur, wenn Sie qualifizierte Termine bekommen.
-          Das ist unser Commitment — und unser Geschäftsmodell.
+          Die ersten 5 Termine sind kostenlos zum Testen. Danach zahlen Sie nur bei Ergebnis:
+          zwischen €100 und €200 pro Termin, je nach Datenqualität und Qualifikationsaufwand.
         </p>
       </div>
     </div>

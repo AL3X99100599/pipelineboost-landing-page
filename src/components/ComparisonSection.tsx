@@ -12,7 +12,7 @@ const manualPoints = [
 const automatedPoints = [
   "Alle Kontakte werden parallel angesprochen — in Tagen, nicht Monaten.",
   "SMS wird gelesen, auch wenn niemand rangeht. Öffnungsrate: über 90 %.",
-  "Keine Fixkosten. Sie zahlen nur, wenn qualifizierte Termine gebucht werden.",
+  "Keine Fixkosten. Die ersten 5 Termine kostenlos, danach €100–€200 je nach Datenqualität.",
   "Konsistente Qualität — rund um die Uhr, ohne Motivationstief.",
   "Kein Recruiting, keine Einarbeitung, keine Fluktuation.",
   "Ihr Vertrieb bekommt fertige Termine — und macht das, was er am besten kann: abschließen.",
@@ -103,7 +103,7 @@ const ComparisonSection = () => {
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
           <p className="text-xs text-muted-foreground mt-3">
-            ✓ Kein Risiko · ✓ Keine Fixkosten · ✓ Erste Termine in 96h
+            ✓ Erste 5 Termine kostenlos · ✓ Danach €100–€200 · ✓ Keine Fixkosten
           </p>
         </div>
       </div>

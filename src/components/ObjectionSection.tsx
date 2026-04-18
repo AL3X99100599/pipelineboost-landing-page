@@ -20,7 +20,7 @@ const objections = [
   },
   {
     q: "Was kostet mich das, wenn es nicht funktioniert?",
-    a: "Nichts. Kein Setup-Fee, kein Retainer, keine Vorabkosten. Wenn kein qualifizierter Termin zustande kommt, zahlen Sie keinen Cent. Das volle Risiko liegt bei uns.",
+    a: "Nichts. Kein Setup-Fee, kein Retainer, keine Vorabkosten. Die ersten 5 Termine sind kostenlos zum Testen. Danach zahlen Sie nur bei Ergebnis: zwischen €100 und €200 pro Termin, je nach Datenqualität und Qualifikationsaufwand.",
   },
   {
     q: "Wie lange dauert es, bis wir Ergebnisse sehen?",

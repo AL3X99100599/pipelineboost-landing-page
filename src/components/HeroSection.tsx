@@ -1,4 +1,4 @@
-import { ArrowRight, Zap, Shield, Clock, TrendingUp } from "lucide-react";
+import { ArrowRight, Zap, Shield, Clock, TrendingUp, Gift } from "lucide-react";
 
 const HeroSection = () => {
   const scrollToCalendly = () => {
@@ -15,8 +15,14 @@ const HeroSection = () => {
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 py-20 sm:py-32">
         <div className="max-w-4xl mx-auto">
+          {/* Pricing Pill - Mobile optimized */}
+          <div className="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-primary-foreground mb-4 sm:mb-6">
+            <Gift className="w-4 h-4" />
+            <span className="text-sm font-semibold">5 Termine kostenlos · Danach €100–€200</span>
+          </div>
+
           {/* Tag */}
-          <div className="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full glow-border bg-primary/5 mb-8">
+          <div className="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full glow-border bg-primary/5 mb-6 sm:mb-8">
             <Zap className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-primary">Performance-basiert · Kein Risiko</span>
           </div>
@@ -26,18 +32,17 @@ const HeroSection = () => {
             Jeder Lead hat Sie{" "}
             <span className="text-gradient">€50–€500</span> gekostet.
             <br />
-            <span className="text-muted-foreground">Wir reaktivieren die, die nie gekauft haben.</span>
+            <span className="text-muted-foreground">Die ersten 5 Termine sind kostenlos.</span>
           </h1>
 
           {/* Subheadline */}
-          <p className="animate-fade-up-delay-2 text-lg sm:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed">
-            Ihr Vertrieb schließt Neukunden ab. Alte CRM-Kontakte bleiben liegen.
-            Unser KI-System macht aus diesen Kontakten gebuchte, qualifizierte Termine —
-            ohne Fixkosten, ohne Setup-Fee. Sie zahlen nur bei Ergebnis.
+          <p className="animate-fade-up-delay-2 text-base sm:text-xl text-muted-foreground max-w-2xl mb-6 sm:mb-10 leading-relaxed">
+            Unser KI-System macht aus Ihren alten CRM-Kontakten gebuchte, qualifizierte Termine.
+            Kein Setup-Fee, keine Fixkosten.
           </p>
 
           {/* CTAs */}
-          <div className="animate-fade-up-delay-3 flex flex-col sm:flex-row gap-4 mb-16">
+          <div className="animate-fade-up-delay-3 flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-16">
             <button
               onClick={scrollToCalendly}
               className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:brightness-110 transition-all duration-200 text-lg"

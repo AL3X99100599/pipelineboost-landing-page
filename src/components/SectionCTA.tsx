@@ -15,7 +15,7 @@ const SectionCTA = ({ text = "Erstgespräch buchen" }: { text?: string }) => {
         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
       </button>
       <p className="text-xs text-muted-foreground mt-3">
-        ✓ Kein Setup-Fee · ✓ Kein Risiko · ✓ Erste Termine in 96h
+        ✓ Kein Setup-Fee · ✓ Die ersten 5 Termine kostenlos · ✓ Danach €100–€200 je nach Qualität
       </p>
     </div>
   );
